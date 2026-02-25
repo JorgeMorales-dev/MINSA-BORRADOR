@@ -1,0 +1,115 @@
+:root{
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --border: #e6e9ee;
+  --primary: #1976d2;
+  --radius: 10px;
+  --shadow: 0 8px 20px rgba(11,22,39,0.06);
+  --max-width: 960px;
+}
+
+/* Page container used by forms and dashboard content */
+.ui-container{
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.ui-card{
+  background: var(--card);
+  padding: 32px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: var(--max-width);
+  box-sizing: border-box;
+}
+
+.ui-form{
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.ui-title{
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.ui-section{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Two-column grid helper for wider screens */
+.grid-2{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+/* utility to make an element span all columns inside a grid */
+.grid-2 .full{
+  grid-column: 1 / -1;
+}
+
+.ui-section-title{
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  margin: 0;
+}
+
+.ui-control{
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  color: #0f172a;
+  background: #fff;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.ui-textarea{ min-height: 96px; resize: vertical; }
+
+.ui-actions{ display:flex; justify-content:flex-end; gap:12px; }
+
+.btn{
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-primary{ background: var(--primary); color: #fff; }
+.btn-ghost{ background: transparent; color: var(--muted); border: 1px solid transparent; }
+
+/* Small responsive tweaks */
+@media (max-width: 640px){
+  :root{ --max-width: 100%; }
+  .ui-card{ padding: 20px; }
+}
+
+/* On larger screens use two-column layout for sections that opt in */
+@media (min-width: 900px){
+  .grid-2{ grid-template-columns: repeat(2, 1fr); }
+  .ui-card{ padding: 40px; }
+  .ui-title{ font-size: 1.5rem }
+}
+
+/* Dashboard utilities (non-layout) to keep interface consistent */
+.dash-header{ padding: 16px 0; color: #0f172a; font-weight:600 }
+.dash-section{ background: transparent; padding: 12px 0 }
