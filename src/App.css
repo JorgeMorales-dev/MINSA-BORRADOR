@@ -1,42 +1,234 @@
-#root {
-  max-width: 1280px;
+/* Layout Principal */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #f4f6f9 0%, #f9fafb 100%);
+}
+
+.app-main {
+  flex: 1;
+  padding: 40px 20px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, var(--primary) 0%, #1565c0 100%);
+  color: white;
+  padding: 30px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.app-header.compact {
+  padding: 20px 20px;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.app-title.small {
+  font-size: 1.5rem;
+}
+
+.app-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin: 0;
+  font-weight: 400;
+}
+
+.btn-back {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: white;
+}
+
+.btn-logout {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.4);
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: white;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.hero-content h2 {
+  font-size: 2.5rem;
+  color: #0f172a;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid #e6e9ee;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-color: var(--primary);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  color: #0f172a;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.feature-card .btn {
+  width: 100%;
+  padding: 10px 16px;
+}
+
+/* Footer */
+.app-footer {
+  background: #f9fafb;
+  border-top: 1px solid #e6e9ee;
+  padding: 24px 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+.app-footer p {
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 24px 16px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .header-content {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1.75rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .feature-card {
+    padding: 24px 16px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 480px) {
+  .app-main {
+    padding: 20px 16px;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .hero-section {
+    margin-bottom: 30px;
+  }
 
-.read-the-docs {
-  color: #888;
+  .app-title {
+    font-size: 1.25rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1.5rem;
+  }
 }

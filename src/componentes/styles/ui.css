@@ -21,10 +21,12 @@
 }
 
 .ui-card{
+  /* white background with subtle relief to separate the form from the page */
   background: var(--card);
-  padding: 32px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  padding: 28px;
+  border-radius: calc(var(--radius) - 2px);
+  box-shadow: 0 6px 18px rgba(11,22,39,0.06);
+  border: 1px solid var(--border);
   width: 100%;
   max-width: var(--max-width);
   box-sizing: border-box;
@@ -81,7 +83,37 @@
   width: 100%;
 }
 
-.ui-textarea{ min-height: 96px; resize: vertical; }
+.ui-textarea{ height: 96px; resize: none; }
+
+/* Combo (input + dropdown) for searchable country selector */
+.combo {
+  position: relative;
+}
+.combo .ui-control {
+  width: 100%;
+}
+.combo-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  border-radius: 6px;
+  margin-top: 6px;
+  z-index: 60;
+  max-height: 180px; /* show ~6-8 items, rest scrolls */
+  overflow-y: auto;
+}
+.combo-item {
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #0f172a;
+}
+.combo-item:hover {
+  background: #f1f5f9;
+}
 
 .ui-actions{ display:flex; justify-content:flex-end; gap:12px; }
 
@@ -96,6 +128,7 @@
 
 .btn-primary{ background: var(--primary); color: #fff; }
 .btn-ghost{ background: transparent; color: var(--muted); border: 1px solid transparent; }
+.btn-danger{ background: #e74c3c; color: #fff; }
 
 /* Small responsive tweaks */
 @media (max-width: 640px){
@@ -113,3 +146,49 @@
 /* Dashboard utilities (non-layout) to keep interface consistent */
 .dash-header{ padding: 16px 0; color: #0f172a; font-weight:600 }
 .dash-section{ background: transparent; padding: 12px 0 }
+
+/* Modal overlay for verifying form data */
+.modal-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal{
+  background: var(--card);
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 500px;
+  /* ensure text is dark on white background */
+  color: #0f172a;
+}
+
+.modal h2{ margin-top:0; }
+
+/* date input wrapper so icon sits inside field */
+.date-input-wrapper{ position: relative; }
+.date-input-wrapper input{ padding-right:2.5rem; }
+.date-input-wrapper .calendar-icon{
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  /* pointer-events removed to allow clicking when we enable interactivity */
+  width: 1rem;
+  height: 1rem;
+  fill: var(--muted);
+}
+
+/* when icon should be clickable, show pointer cursor */
+.date-input-wrapper .calendar-icon.clickable{
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+

@@ -1,112 +1,93 @@
 import { useState } from "react"
+import "../styles/ui.css"
 
-function Login() {
-
-  // 1️⃣ Estados (variables dinámicas)
+function Login({ onSuccess }) {
+  // Estados
   const [correo, setCorreo] = useState("")
   const [password, setPassword] = useState("")
-  const [rol, setRol] = useState("Solicitante")
 
-  // 2️⃣ Función que se ejecuta al enviar
+  // Función que se ejecuta al enviar
   function handleLogin(e) {
-    e.preventDefault()  // evita que recargue la página
+    e.preventDefault()
 
-    console.log("Correo:", correo)
-    console.log("Password:", password)
-    console.log("Rol:", rol)
-
-    alert("Login estructural (no funcional)")
+    // Sin validación real - solo redirige al home
+    if (onSuccess) {
+      onSuccess()
+    }
   }
 
-  // 3️⃣ Lo que se renderiza
+  /*
+    Código comentado para integrar con backend más adelante.
+    Mantener comentado evita romper la funcionalidad actual.
+
+    Ejemplo usando fetch (descomentar cuando quieras conectar al backend):
+
+    async function handleLoginBackend(e) {
+      e.preventDefault()
+      try {
+        const res = await fetch('https://api.tuservidor.com/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: correo, password })
+        })
+
+        if (!res.ok) {
+          // manejar error (mostrar mensaje al usuario)
+          console.error('Login failed', res.status)
+          return
+        }
+
+        const data = await res.json()
+        // ejemplo: data.token
+        // guardar token en localStorage o cookie según sea necesario
+        // localStorage.setItem('token', data.token)
+
+        // llamar onSuccess para navegar a home
+        if (onSuccess) onSuccess()
+      } catch (err) {
+        console.error('Error connecting to auth service', err)
+      }
+    }
+
+    // También puedes usar axios si lo instalas:
+    // import axios from 'axios'
+    // const res = await axios.post('/auth/login', { email: correo, password })
+    // manejar res.data
+  */
+
   return (
-  <div style={styles.container}>
-    <div style={styles.card}>
-      <h2 style={styles.title}>Sistema de Registro Sanitario</h2>
+    <div className="ui-card">
+      <form className="ui-form" aria-label="Iniciar Sesión" onSubmit={handleLogin}>
+        <h1 className="ui-title">Iniciar Sesión</h1>
 
-      <form onSubmit={handleLogin} style={styles.form}>
+        <section className="ui-section">
+          <h3 className="ui-section-title">Credenciales</h3>
+          <div className="grid-2">
+            <input
+              type="email"
+              placeholder="Correo Electrónico"
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
+              className="ui-control"
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="ui-control"
+            />
+          </div>
+        </section>
 
-        <input
-          type="email"
-          placeholder="Correo"
-          value={correo}
-          onChange={(e) => setCorreo(e.target.value)}
-          style={styles.input}
-        />
-
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
-        />
-
-        <select
-          value={rol}
-          onChange={(e) => setRol(e.target.value)}
-          style={styles.input}
-        >
-          <option>Solicitante</option>
-          <option>Evaluador</option>
-          <option>Administrador</option>
-        </select>
-
-        <button type="submit" style={styles.button}>
-          Ingresar
-        </button>
-
+        <div className="ui-actions">
+          <button type="submit" className="btn btn-primary">
+            Ingresar
+          </button>
+        </div>
       </form>
     </div>
-  </div>
-
   )
 }
 
 export default Login
-
-const styles = {
-  container: {
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f4f6f9"
-  },
-
-  card: {
-    backgroundColor: "white",
-    padding: "40px",
-    borderRadius: "10px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    width: "350px"
-  },
-
-  title: {
-    textAlign: "center",
-    marginBottom: "20px"
-  },
-
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px"
-  },
-
-  input: {
-    padding: "10px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    fontSize: "14px"
-  },
-
-  button: {
-    padding: "10px",
-    borderRadius: "5px",
-    border: "none",
-    backgroundColor: "#1976d2",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer"
-  }
-}
